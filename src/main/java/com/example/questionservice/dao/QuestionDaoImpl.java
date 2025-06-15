@@ -18,7 +18,7 @@ public class QuestionDaoImpl implements QuestionDaoCustom{
 
     public List<Integer> findRandomQuestionsByCategory(String category, int numQ) {
         String sql = "SELECT id FROM question WHERE category = :category ORDER BY RAND()";
-        Query query = entityManager.createNativeQuery(sql, Question.class);
+        Query query = entityManager.createNativeQuery(sql);
         query.setParameter("category", category);
         query.setMaxResults(numQ);
         return query.getResultList();

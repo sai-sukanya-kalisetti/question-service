@@ -10,7 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.example.questionservice.dao.QuestionDao;
-import com.example.questionservice.dao.QuestionDaoCustom;
+import com.example.questionservice.dao.QuestionDaoImpl;
 import com.example.questionservice.model.Question;
 import com.example.questionservice.model.QuestionWrapper;
 import com.example.questionservice.model.Response;
@@ -22,7 +22,7 @@ public class QuestionService {
     QuestionDao questionDao;
     
     @Autowired
-    QuestionDaoCustom questionDaoCustom;
+    QuestionDaoImpl questionDaoImpl;
 
     public ResponseEntity<List<Question>> getAllQuestions() {
         try {
@@ -93,7 +93,7 @@ public class QuestionService {
     //Generate Questions for quiz and return only Id's of Questions - works once quiz service exists 
 
 	public ResponseEntity<List<Integer>> generateQuestionsForQuiz(String category, Integer numQ) {
-		List<Integer> questionIds = questionDaoCustom.findRandomQuestionsByCategory(category, numQ);
+		List<Integer> questionIds = questionDaoImpl.findRandomQuestionsByCategory(category, numQ);
 		return ResponseEntity.status(HttpStatus.ACCEPTED).body(questionIds);
 	}
 	
