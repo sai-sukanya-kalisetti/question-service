@@ -58,7 +58,7 @@ public class QuestionController {
     
     /*Things Question Service has to do....- works once quiz service exists */
     //Generate Questions for quiz and return only Id's of Questions 
-    
+     
     @GetMapping("createQuizQuestions")
     public ResponseEntity<List<Integer>> generateQuestionsForQuiz
     				(@RequestParam String category,@RequestParam Integer numQ) {
@@ -73,6 +73,5 @@ public class QuestionController {
     @PostMapping("getScore")
     public ResponseEntity<Integer> getScore(@RequestBody List<Response> responses){
 		return questionService.getScore(responses);
-    	
     }
 }
