@@ -3,6 +3,7 @@ package com.example.questionservice.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,6 +26,10 @@ public class QuestionController {
 
     @Autowired
     QuestionService questionService;
+    
+    //LoadBalancers checking....
+    @Autowired
+    Environment environment;
 
     @GetMapping("getAll")
     public ResponseEntity<List<Question>> getAllQuestions(){
@@ -62,11 +67,13 @@ public class QuestionController {
     @GetMapping("createQuizQuestions")
     public ResponseEntity<List<Integer>> generateQuestionsForQuiz
     				(@RequestParam String category,@RequestParam Integer numQ) {
+    	
     	return questionService.generateQuestionsForQuiz(category, numQ);
     }
     
     @PostMapping("/getQuizQuestions")
     public ResponseEntity<List<QuestionWrapper>> getQuestionFromId(@RequestBody List<Integer> questionIds){
+    	System.out.println(environment.getProperty("local.server.port"));
 		return questionService.getQuestionFromId(questionIds);
     }
     
