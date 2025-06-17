@@ -61,9 +61,11 @@ public class QuestionController {
     	return questionService.updateQuestion(id, updatedQuestion);
     }
     
-    /*Things Question Service has to do....- works once quiz service exists */
-    //Generate Questions for quiz and return only Id's of Questions 
-     
+    /*Things Question Service has to do....- works once quiz service exists 
+     * Generate Questions for quiz and return only Id's of Questions */
+    
+    
+     /*GET http://localhost:8081/question/createQuizQuestions?category=sql&numQ=2*/
     @GetMapping("createQuizQuestions")
     public ResponseEntity<List<Integer>> generateQuestionsForQuiz
     				(@RequestParam String category,@RequestParam Integer numQ) {
@@ -71,12 +73,35 @@ public class QuestionController {
     	return questionService.generateQuestionsForQuiz(category, numQ);
     }
     
+    
+    /*POST http://localhost:8081/question/getQuizQuestions
+     * [1,7,8,9]*/
     @PostMapping("/getQuizQuestions")
     public ResponseEntity<List<QuestionWrapper>> getQuestionFromId(@RequestBody List<Integer> questionIds){
     	System.out.println(environment.getProperty("local.server.port"));
 		return questionService.getQuestionFromId(questionIds);
     }
     
+    
+    /* POST http://localhost:8081/question/getScore
+     * [
+    {
+        "id": 1,
+        "response": "1995"
+    },
+    {
+        "id": 7,
+        "response": "Method Overriding"
+    },
+    {
+        "id": 8,
+        "response":  "Abstract class"
+    },
+    {
+        "id": 9,
+        "response": "ArrayIndexOutOfBoundsException"
+    }
+]*/
     @PostMapping("getScore")
     public ResponseEntity<Integer> getScore(@RequestBody List<Response> responses){
 		return questionService.getScore(responses);
