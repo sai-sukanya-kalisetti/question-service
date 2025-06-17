@@ -62,7 +62,7 @@ public class QuestionController {
     }
     
     /*Things Question Service has to do....- works once quiz service exists 
-     * Generate Questions for quiz and return only Id's of Questions */
+     * Generate Questions for quiz and return only Id's of Questions  */
     
     
      /*GET http://localhost:8081/question/createQuizQuestions?category=sql&numQ=2*/
